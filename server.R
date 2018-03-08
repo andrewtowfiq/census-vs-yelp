@@ -24,7 +24,7 @@ shinyServer(function(input, output) {
       
     } else if(input$parameter.key == "Income"){
       
-      test.run <- input$parameter.key
+      data.filtered <- data.income
       
     } else if(input$parameter.key == "Crime Rate") {
   
@@ -46,8 +46,11 @@ shinyServer(function(input, output) {
   # Return the rendered Test Text  
   output$out.text <- renderText({
     input.county <- GetCountyAtPoint(input$plot_click$x, input$plot_click$y)
+    
+    ############## FOR TESTING PURPOSES ONLY ##############
     print(capitalize(substr(input.county, 12, 1000000)))
-    return( capitalize(substr(input.county, 12, 1000000)) )
+    
+    return( paste0(capitalize(substr(input.county, 12, 1000000)), " County") )
     
   })
   
@@ -82,4 +85,3 @@ shinyServer(function(input, output) {
   
   
 })
-
