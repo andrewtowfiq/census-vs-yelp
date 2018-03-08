@@ -1,8 +1,9 @@
 library("shiny")
+library("shinythemes")
 
 # Define UI for application that draws a histogram
-shinyUI(fluidPage(
-  
+shinyUI(fluidPage(theme = shinytheme("slate"),
+                  
   # Title place holder for project 
   titlePanel("Final Project (Change Title)"),
   
@@ -18,8 +19,8 @@ shinyUI(fluidPage(
       ),
     mainPanel(
       textOutput("out.text"),
-      plotOutput("base.map", click = "plot_click"),
-      plotOutput("pie")
+      plotOutput("base.map", width = "100%", click = "plot_click"),
+      plotlyOutput("pie")
       )
     )
   )
