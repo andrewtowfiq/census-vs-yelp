@@ -11,16 +11,13 @@ shinyUI(fluidPage(theme = shinytheme("slate"),
   sidebarLayout(
     sidebarPanel(
       radioButtons("parameter.key", "Select Parameter",
-                   choices = c("Overview", "Income", "Age", "Ethnicity", "Education")),
-      # Slider Inputs to set the parameter that needs to be analysed 
-      # parameter = Income, Age, Ethnicity, Education   
-      selectInput("parameter.key", "Select Parameter", choices = c("Overview", "Income", "Age", "Ethnicity", "Education"), multiple = FALSE)
-      
-      ),
-    mainPanel(
+                   choices = c("Overview", "Income", "Age", "Ethnicity", "Crime Rate")),
       textOutput("out.text"),
+      tableOutput("table")
+      ),
+    
+    mainPanel(
       plotOutput("base.map", width = "100%", click = "plot_click"),
-      plotlyOutput("pie"),
       plotlyOutput("county.age.bar"),
       plotlyOutput("county.race.bar")
       )

@@ -1,40 +1,40 @@
-County,Per capita Income ,Median household Income ,Median family income
-king,"$38,211 ","$68,065 ","$87,010 "
-san juan,"$35,487 ","$50,726 ","$61,096 "
-snohomish,"$30,635 ","$66,300 ","$77,479 "
-kitsap,"$29,755 ","$59,549 ","$71,065 "
-thurston,"$29,707 ","$60,930 ","$71,833 "
-island,"$29,079 ","$57,190 ","$68,106 "
-jefferson,"$28,528 ","$46,048 ","$59,964 "
-clark,"$27,828 ","$58,262 ","$67,352 "
-pierce,"$27,446 ","$57,869 ","$68,462 "
-benton,"$27,161 ","$57,354 ","$69,834 "
-skagit,"$26,925 ","$54,811 ","$63,468 "
-columbia,"$25,810 ","$43,611 ","$53,452 "
-whatcom,"$25,407 ","$49,031 ","$64,586 "
-spokane,"$25,127 ","$47,250 ","$59,999 "
-lincoln,"$24,757 ","$45,582 ","$52,083 "
-clallam,"$24,449 ","$44,398 ","$54,837 "
-chelan,"$24,378 ","$48,674 ","$57,856 "
-skamania,"$24,140 ","$48,704 ","$61,540 "
-asotin,"$23,731 ","$41,665 ","$52,250 "
-kittitas,"$23,467 ","$41,232 ","$61,276 "
-pacific,"$23,326 ","$39,642 ","$51,450 "
-wahkiakum,"$23,115 ","$40,372 ","$47,266 "
-walla walla,"$23,027 ","$45,575 ","$55,773 "
-cowlitz,"$22,948 ","$45,877 ","$55,002 "
-garfield,"$22,825 ","$42,269 ","$55,769 "
-pend oreille,"$22,546 ","$38,896 ","$46,971 "
-mason,"$22,530 ","$48,104 ","$56,809 "
-douglas,"$22,359 ","$48,708 ","$55,766 "
-stevens,"$21,773 ","$42,845 ","$51,544 "
-lewis,"$21,695 ","$43,874 ","$53,358 "
-grays harbor,"$21,656 ","$41,899 ","$49,745 "
-klickitat,"$21,553 ","$37,398 ","$46,012 "
-okanogan,"$20,093 ","$38,551 ","$48,418 "
-grant,"$19,718 ","$42,572 ","$50,065 "
-whitman,"$19,506 ","$36,368 ","$61,598 "
-yakima,"$19,325 ","$42,877 ","$48,004 "
-franklin,"$18,660 ","$47,749 ","$52,218 "
-ferry,"$18,021 ","$35,485 ","$43,576 "
-adams,"$16,689 ","$40,829 ","$43,551 "
+County,Per capita Income ,Median household Income ,Median family income,lowercase
+King,38211,68065,87010,king
+San Juan,35487,50726,61096,san juan
+Snohomish,30635,66300,77479,snohomish
+Kitsap,29755,59549,71065,kitsap
+Thurston,29707,60930,71833,thurston
+Island,29079,57190,68106,island
+Jefferson,28528,46048,59964,jefferson
+Clark,27828,58262,67352,clark
+Pierce,27446,57869,68462,pierce
+Benton,27161,57354,69834,benton
+Skagit,26925,54811,63468,skagit
+Columbia,25810,43611,53452,columbia
+Whatcom,25407,49031,64586,whatcom
+Spokane,25127,47250,59999,spokane
+Lincoln,24757,45582,52083,lincoln
+Clallam,24449,44398,54837,clallam
+Chelan,24378,48674,57856,chelan
+Skamania,24140,48704,61540,skamania
+Asotin,23731,41665,52250,asotin
+Kittitas,23467,41232,61276,kittitas
+Pacific,23326,39642,51450,pacific
+Wahkiakum,23115,40372,47266,wahkiakum
+Walla Walla,23027,45575,55773,walla walla
+Cowlitz,22948,45877,55002,cowlitz
+Garfield,22825,42269,55769,garfield
+Pend Oreille,22546,38896,46971,pend oreille
+Mason,22530,48104,56809,mason
+Douglas,22359,48708,55766,douglas
+Stevens,21773,42845,51544,stevens
+Lewis,21695,43874,53358,lewis
+Grays Harbor,21656,41899,49745,grays harbor
+Klickitat,21553,37398,46012,klickitat
+Okanogan,20093,38551,48418,okanogan
+Grant,19718,42572,50065,grant
+Whitman,19506,36368,61598,whitman
+Yakima,19325,42877,48004,yakima
+Franklin,18660,47749,52218,franklin
+Ferry,18021,35485,43576,ferry
+Adams,16689,40829,43551,adams
