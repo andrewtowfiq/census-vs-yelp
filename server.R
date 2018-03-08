@@ -9,8 +9,9 @@ source("spatial_utils.R")
 
 ###################### DATA FRAMES ######################
 
-data.race <- read.csv("data/race.csv", stringsAsFactors = T)
-data.race.df <- as.data.frame(data.race)
+data.race <- read.csv("data/income.csv", stringsAsFactors = T)
+data.race.df <- as.data.frame(data.race) %>%
+  select(County.name, Population, White, Black, Native, Asian, Islander, Hispanic)
 
 data.age <- read.csv("data/age_groups_washington.csv", stringsAsFactors = T)
 data.age.df <- as.data.frame(data.age) %>%
@@ -51,7 +52,7 @@ shinyServer(function(input, output) {
       data.filtered <- data.age.df
     } else if (input$parameter.key == "Ethnicity") {
       data.filtered <- data.race.df
-    } else if(input$parameter.key == "Crime"){
+    } else if(input$parameter.key == "Burglary"){
       data.filtered <- data.crime.df
     } else {
       data.filtered <- NULL 
@@ -119,7 +120,7 @@ shinyServer(function(input, output) {
         layout(yaxis = list(title = 'Population'), xaxis = list(title = 'Age Group'))
       
       
-    } else if (input$parameter.key == "Crime"){
+    } else if (input$parameter.key == "Burglary"){
       final.df <- filtered()
       final.df <- filter(final.df, county == toupper(input.county))
       p <- plot_ly(x = final.df$year,
@@ -129,8 +130,11 @@ shinyServer(function(input, output) {
       
 
     } else if (input$parameter.key == "Ethnicity") {
-      final.df <- filtered()
-      curr.county.race.df <- filter(final.df, County == input.county)
+      final.df <- as.data.frame(filtered())
+      View(final.df)
+      curr.county.race.df <- filter(final.df, County.name == input.county)
+      View(input.county)
+      View(curr.county.race.df)
       race.stats <-
         c(
           curr.county.race.df$X2010.White.population,

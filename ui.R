@@ -5,14 +5,16 @@ library("shinythemes")
 shinyUI(fluidPage(theme = shinytheme("slate"),
                   
   # Title place holder for project 
-  titlePanel("Final Project (Change Title)"),
+  titlePanel("Analysis of Factors affecting Restaraunts based on Counties In WA"),
   
   # Creation of SideBar and Widgets 
   sidebarLayout(
     sidebarPanel(
       radioButtons("parameter.key", "Select Parameter",
-                   choices = c("Overview", "Income", "Age", "Ethnicity", "Crime")),
+                   choices = c("Overview", "Income", "Age", "Ethnicity", "Burglary")),
       textOutput("out.text")
+      
+      #For Testing
       #tableOutput("table")
       ),
     
