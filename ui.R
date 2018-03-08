@@ -11,7 +11,7 @@ shinyUI(fluidPage(theme = shinytheme("slate"),
   sidebarLayout(
     sidebarPanel(
       radioButtons("parameter.key", "Select Parameter",
-                   choices = c("Overview", "Income", "Age", "Ethnicity", "Crime Rate")),
+                   choices = c("Overview", "Income", "Age", "Ethnicity", "Crime")),
       textOutput("out.text")
       #tableOutput("table")
       ),

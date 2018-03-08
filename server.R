@@ -21,6 +21,11 @@ data.income <- read.csv("data/income.csv", stringsAsFactors = T)
 color.frame <- data.frame(data.income$lowercase, randomColor(39), stringsAsFactors = F)
 colnames(color.frame) <- c("subregion", "color")
 
+data.crime <- read.csv("data/crime.csv", stringsAsFactors = T)
+data.crime.df <- as.data.frame(data.crime) %>%
+  select(year, county, "SRS_BURGLARY") %>%
+  filter( year < 2011)
+
 
 ###################### SHINY SERVER ######################
 
@@ -46,8 +51,10 @@ shinyServer(function(input, output) {
       data.filtered <- data.age.df
     } else if (input$parameter.key == "Ethnicity") {
       data.filtered <- data.race.df
+    } else if(input$parameter.key == "Crime"){
+      data.filtered <- data.crime.df
     } else {
-      data.filtered <- paste(input$parameter.key)
+      data.filtered <- NULL 
     }
     return(data.filtered)
   })
@@ -110,6 +117,17 @@ shinyServer(function(input, output) {
               y = totals.num,
               type = "bar") %>%
         layout(yaxis = list(title = 'Population'), xaxis = list(title = 'Age Group'))
+      
+      
+    } else if (input$parameter.key == "Crime"){
+      final.df <- filtered()
+      final.df <- filter(final.df, county == toupper(input.county))
+      p <- plot_ly(x = final.df$year,
+                   y = final.df$SRS_BURGLARY ,
+                   type = "bar") %>%
+        layout(yaxis = list(title = 'Number of Burglaries'), xaxis = list(title = 'Year'))
+      
+
     } else if (input$parameter.key == "Ethnicity") {
       final.df <- filtered()
       curr.county.race.df <- filter(final.df, County == input.county)
@@ -142,8 +160,6 @@ shinyServer(function(input, output) {
     }
     return(p)
   })
-  
-  
   
   output$datatable <- renderTable({
     
