@@ -18,8 +18,8 @@ shinyUI(fluidPage(
       ),
     mainPanel(
       textOutput("out.text"),
-      plotOutput("base.map")
-      
+      plotOutput("base.map", click = "plot_click"),
+      plotlyOutput("pie")
       )
     )
   )
