@@ -17,7 +17,8 @@ shinyUI(fluidPage(
       
       ),
     mainPanel(
-      textOutput("out.text")
+      textOutput("out.text"),
+      plotOutput("base.map")
       
       )
     )

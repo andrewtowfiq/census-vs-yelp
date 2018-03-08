@@ -12,7 +12,7 @@ head(washington_county)
 create_base <- ggplot(data = only_wa, mapping = aes(x = long, y = lat, group = group)) +
   coord_fixed(1.3) +
   geom_polygon(color = "black", fill = "white") #color = perimeter of map , fill = whole map color fill 
-create_base + theme_nothing() + 
+create_base <- create_base + theme_nothing() + 
    geom_polygon(data = washington_county, fill = NA, color = "red") + # color = color of county outline  
    geom_polygon(color = "black", fill = NA) # color = perimeter of map that should be kept same as previous color
 
