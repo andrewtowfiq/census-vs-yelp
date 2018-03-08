@@ -18,6 +18,7 @@ GetCountyAtPoint <- function(long, lat) {
   IDs <- sapply(strsplit(world$names, ":"), function(x) x[1])
   world.sp <- map2SpatialPolygons(world, IDs=IDs, proj4string=CRS("+proj=longlat +datum=WGS84"))
   country.names = sapply(world.sp@polygons, function(x) x@ID)
+  
 
   # create spatial point from coords
   point.sp = SpatialPoints(data.frame(long, lat), proj4string=CRS("+proj=longlat +datum=WGS84"))
@@ -28,3 +29,4 @@ GetCountyAtPoint <- function(long, lat) {
   # get country name
   country.names[country.index]
 }
+

@@ -4,6 +4,7 @@ library(ggplot2)
 library(randomcoloR)
 library(ggmap)
 library(plotly)
+library(Hmisc)
 source("spatial_utils.R")
 
 data.race <- read.csv("data/race.csv", stringsAsFactors = F)
@@ -45,8 +46,8 @@ shinyServer(function(input, output) {
   # Return the rendered Test Text  
   output$out.text <- renderText({
     input.county <- GetCountyAtPoint(input$plot_click$x, input$plot_click$y)
-    print(input.county)
-    return( paste(input.county) )
+    print(capitalize(substr(input.county, 12, 1000000)))
+    return( capitalize(substr(input.county, 12, 1000000)) )
     
   })
   

@@ -1,5 +1,4 @@
 library(ggplot2)
-
 states <- map_data("state")
 west_coast <- subset(states, region %in% c("washington"))
 only_wa <- subset(states, region == "washington")
