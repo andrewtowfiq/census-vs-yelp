@@ -28,11 +28,15 @@ colnames(color.frame) <- c("subregion", "color")
 shinyServer(function(input, output) {
   ############## FOR TESTING PURPOSES ONLY ##############
   output$out.text <- renderText({
+    
     input.county <- GetCountyAtPoint(input$plot_click$x, input$plot_click$y)
     input.county <- capitalize(substr(input.county, 12, 1000000))
     
-    ############## FOR TESTING PURPOSES ONLY ##############
-    return(paste0(input.county, " County"))
+    if( is.na(input.county) ) { 
+      return(paste0("You Have Not Selected a County"))
+    } else (
+      return(paste0("You Have Selected ",input.county, " County"))  
+    )
   })
   
   filtered <- reactive({
@@ -93,7 +97,7 @@ shinyServer(function(input, output) {
   })
   
   #creates a bar graph for age distrtibution for a county
-  output$county.age.bar <- renderPlotly({
+  output$plotly <- renderPlotly({
     
     input.county <- GetCountyAtPoint(input$plot_click$x, input$plot_click$y)
     input.county <- capitalize(substr(input.county, 12, 1000000))
@@ -102,22 +106,13 @@ shinyServer(function(input, output) {
       final.df <- filtered()
       curr.county.age.df <- filter(final.df, Area.Name == input.county & Age.Group != "Total")
       totals.num <- as.numeric(gsub(",", "", curr.county.age.df$Total))
-      plot_ly(x = curr.county.age.df$Age.Group,
+      p <- plot_ly(x = curr.county.age.df$Age.Group,
               y = totals.num,
               type = "bar") %>%
         layout(yaxis = list(title = 'Population'), xaxis = list(title = 'Age Group'))
-    }
-  })
-  
-  #creates bar graph for race distribution for a county
-  output$county.race.bar <- renderPlotly({
-    
-    input.county <- GetCountyAtPoint(input$plot_click$x, input$plot_click$y)
-    input.county <- capitalize(substr(input.county, 12, 1000000))
-    
-    if (input$parameter.key == "Ethnicity") {
+    } else if (input$parameter.key == "Ethnicity") {
       final.df <- filtered()
-      curr.county.race.df <- filter(final.df, County.name == paste(input.county, "County"))
+      curr.county.race.df <- filter(final.df, County == input.county)
       race.stats <-
         c(
           curr.county.race.df$X2010.White.population,
@@ -129,7 +124,7 @@ shinyServer(function(input, output) {
         )
       race.stats.num <- as.numeric(gsub(",", "", race.stats))
       
-      plot_ly(
+      p <- plot_ly(
         x = c(
           "White.Population",
           "Black.Population",
@@ -142,7 +137,27 @@ shinyServer(function(input, output) {
         type = "bar"
       ) %>%
         layout(yaxis = list(title = 'Population'), xaxis = list(title = 'Race'))
+    } else {
+      p <- NULL
     }
+    return(p)
+  })
+  
+  
+  
+  output$datatable <- renderTable({
+    
+    input.county <- GetCountyAtPoint(input$plot_click$x, input$plot_click$y)
+    input.county <- capitalize(substr(input.county, 12, 1000000))
+    
+    if (input$parameter.key == "Income") {
+      data.table <- filtered()
+      data.table <- select(data.table, "County", "Median.household.Income")
+      colnames(data.table) <- c("County", "Median Household Income($) ")
+      data.table <- filter(data.table, data.table$County == input.county)
+    } else {
+      data.table <- NULL
+    }
+      return(data.table)
   })
 })
-

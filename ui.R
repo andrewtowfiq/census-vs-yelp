@@ -12,14 +12,14 @@ shinyUI(fluidPage(theme = shinytheme("slate"),
     sidebarPanel(
       radioButtons("parameter.key", "Select Parameter",
                    choices = c("Overview", "Income", "Age", "Ethnicity", "Crime Rate")),
-      textOutput("out.text"),
-      tableOutput("table")
+      textOutput("out.text")
+      #tableOutput("table")
       ),
     
     mainPanel(
       plotOutput("base.map", width = "100%", click = "plot_click"),
-      plotlyOutput("county.age.bar"),
-      plotlyOutput("county.race.bar")
+      tableOutput("datatable"),
+      plotlyOutput("plotly")
       )
     )
   )
