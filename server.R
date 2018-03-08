@@ -8,7 +8,14 @@ library(Hmisc)
 source("spatial_utils.R")
 
 data.race <- read.csv("data/race.csv", stringsAsFactors = F)
+data.race.df <- as.data.frame(data.race)
 data.income <- read.csv("data/income.csv", stringsAsFactors = F)
+data.age <- read.csv("data/age_groups_washington.csv", stringsAsFactors = F)
+data.age.df <- as.data.frame(data.age) %>%
+  select(Area.Name:Female)
+#global variable for selected county to compare in bar graphs. needed for filter
+#STILL NOT WORKING
+selectedCounty <- ""
 color.frame <- data.frame(data.income$County, randomColor(39), stringsAsFactors = F)
 colnames(color.frame) <- c("subregion", "color")
 
@@ -47,9 +54,12 @@ shinyServer(function(input, output) {
   output$out.text <- renderText({
     input.county <- GetCountyAtPoint(input$plot_click$x, input$plot_click$y)
     
-    ############## FOR TESTING PURPOSES ONLY ##############
-    print(capitalize(substr(input.county, 12, 1000000)))
+  
     
+    selectedCounty <- capitalize(substr(input.county, 12, 1000000))
+    ############## FOR TESTING PURPOSES ONLY ##############
+    print(selectedCounty)
+    #######################################################
     return( paste0(capitalize(substr(input.county, 12, 1000000)), " County") )
     
   })
@@ -83,5 +93,30 @@ shinyServer(function(input, output) {
     
   })
   
+  #creates a bar graph for age distrtibution for a county
+  output$county.age.bar <- renderPlotly({
+    curr.county.age.df <- filter(data.age.df, Area.Name == selectedCounty & Age.Group != "Total")
+    totals.num <- as.numeric(gsub(",","",curr.county.age.df$Total))
+    plot_ly(
+      x = curr.county.age.df$Age.Group,
+      y = totals.numb,
+      type = "bar"
+    ) %>%
+      layout(yaxis = list(title = 'Population'), xaxis = list(title = 'Age Group'))
+  })
   
+  #creates bar graph for race distribution for a county
+  output$county.race.bar <- renderPlotly({
+    curr.county.race.df <- filter(data.race.df, County.name == paste(selectedCounty, "County"))
+    race.stats <- c(curr.county.race.df$X2010.White.population, curr.county.race.df$X2010.Black.population, curr.county.race.df$X2010.Native.population, 
+      curr.county.race.df$X2010.Asian.population, curr.county.race.df$X2010.Islander.population, curr.county.race.df$X2010.Hispanic.population)
+    race.stats.num <- as.numeric(gsub(",","",race.stats))
+    
+    plot_ly(
+      x = c("White.Population", "Black.Population", "Native.Population", "Asian.Population", "Islander.Population", "Hispanic.Population"),
+      y = race.stats.num,
+      type = "bar"
+    ) %>%
+      layout(yaxis = list(title = 'Population'), xaxis = list(title = 'Race'))
+  })
 })

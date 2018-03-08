@@ -20,7 +20,9 @@ shinyUI(fluidPage(theme = shinytheme("slate"),
     mainPanel(
       textOutput("out.text"),
       plotOutput("base.map", width = "100%", click = "plot_click"),
-      plotlyOutput("pie")
+      plotlyOutput("pie"),
+      plotlyOutput("county.age.bar"),
+      plotlyOutput("county.race.bar")
       )
     )
   )
